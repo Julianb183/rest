@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
+mode=sleep
+for arg in "$@"; do
+  case "$arg" in
+    -z|--shutdown) mode=shutdown ;;
+    -d|--restart) mode=restart ;;
+    -a|--all) ;;
+    '-?'|--help|-h)
+      printf '%s\n' 'Usage: rest [-a] [-z|-d] [-?]'
+      printf '%s\n' '  rest       Suspend'
+      printf '%s\n' '  rest -z    Shut down completely (no confirmation prompt)'
+      printf '%s\n' '  rest -d    Restart (no confirmation prompt)'
+      exit 0 ;;
+    *) printf 'rest: unknown option: %s\n' "$arg" >&2; exit 2 ;;
+  esac
+done
+
+case "$mode" in
+  shutdown) exec systemctl poweroff ;;
+  restart) exec systemctl reboot ;;
+esac
+
 printf '%s\n' 'Press Ctrl+C within one second to cancel.'
 sleep 1
 exec systemctl suspend

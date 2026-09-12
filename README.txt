@@ -9,9 +9,14 @@ USAGE
 macOS and Linux:
   rest
   rest -a
+  rest -z    # shut down completely, without a confirmation prompt
+  rest -d    # restart, without a confirmation prompt
+  rest -?    # show help
 
 Windows PowerShell:
   powershell -ExecutionPolicy Bypass -File "$HOME\rest\rest.ps1"
+  powershell -ExecutionPolicy Bypass -File "$HOME\rest\rest.ps1" -Shutdown
+  powershell -ExecutionPolicy Bypass -File "$HOME\rest\rest.ps1" -Restart
 
 The -a option is accepted everywhere. On macOS it passes --all to the native
 rest-screen animation when that executable is installed.

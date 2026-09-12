@@ -1,7 +1,28 @@
 #!/bin/sh
 set -eu
 all=0
-[ "${1:-}" = '-a' ] || [ "${1:-}" = '--all' ] && all=1
+mode=sleep
+for arg in "$@"; do
+  case "$arg" in
+    -a|--all) all=1 ;;
+    -z|--shutdown) mode=shutdown ;;
+    -d|--restart) mode=restart ;;
+    '-?'|--help|-h)
+      printf '%s\n' 'Usage: rest [-a] [-z|-d] [-?]'
+      printf '%s\n' '  rest       Sleep'
+      printf '%s\n' '  rest -z    Shut down completely (no confirmation prompt)'
+      printf '%s\n' '  rest -d    Restart (no confirmation prompt)'
+      printf '%s\n' '  rest -a    Use the all-screens animation when available'
+      exit 0 ;;
+    *) printf 'rest: unknown option: %s\n' "$arg" >&2; exit 2 ;;
+  esac
+done
+
+case "$mode" in
+  shutdown) exec /usr/bin/sudo /sbin/shutdown -h now ;;
+  restart) exec /usr/bin/sudo /sbin/shutdown -r now ;;
+esac
+
 if [ -x "$HOME/bin/rest-screen" ]; then
   if [ "$all" -eq 1 ]; then exec "$HOME/bin/rest-screen" --all; else exec "$HOME/bin/rest-screen"; fi
 fi
