@@ -6,7 +6,7 @@ A small cross-platform power command for sleeping, shutting down, restarting, an
 
 - macOS: uses the native `rest-screen` animation when installed, then falls back to `pmset sleepnow`.
 - Linux: uses `systemctl suspend`.
-- Windows: uses PowerShell's suspend API.
+- Windows: uses PowerShell's suspend API; the installer also creates a `rest.cmd` command wrapper.
 
 ## Usage
 
@@ -36,7 +36,7 @@ rest '-?'  # show help
 
 ## Installation
 
-Install a platform package from the [latest GitHub Release](https://github.com/Julianb183/rest/releases/latest). Each installer adds its user-level install directory to `PATH` without administrator access.
+Install a platform package from the [latest GitHub Release](https://github.com/Julianb183/rest/releases/latest). Each installer adds its user-level install directory to `PATH` without administrator access. On Windows, restart PowerShell after installation so the updated PATH is loaded.
 
 - macOS: run `macos/install.sh`
 - Linux: run `linux/install.sh`

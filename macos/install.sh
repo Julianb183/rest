@@ -4,6 +4,8 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 mkdir -p "$HOME/bin"
 cp "$ROOT/rest" "$HOME/bin/rest"
 chmod +x "$HOME/bin/rest"
-touch "$HOME/.zprofile"
-grep -Fqx 'export PATH="$HOME/bin:$PATH"' "$HOME/.zprofile" || printf '\n# rest\nexport PATH="$HOME/bin:$PATH"\n' >> "$HOME/.zprofile"
+for profile in "$HOME/.zprofile" "$HOME/.bash_profile"; do
+  touch "$profile"
+  grep -Fqx 'export PATH="$HOME/bin:$PATH"' "$profile" || printf '\n# rest\nexport PATH="$HOME/bin:$PATH"\n' >> "$profile"
+done
 echo "Installed $HOME/bin/rest"

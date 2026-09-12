@@ -6,7 +6,7 @@ param(
   [Alias('?')][switch]$Help
 )
 if ($Help) {
-  @('Usage: rest [-All] [-Shutdown|-Restart] [-?]', '  rest          Sleep', '  rest -Shutdown Shut down completely (no confirmation prompt)', '  rest -Restart  Restart (no confirmation prompt)')
+  @('Usage: rest [-All] [-Shutdown|-Restart] [-?]', '  rest             Sleep', '  rest -Shutdown   Shut down completely (no confirmation prompt)', '  rest -Restart    Restart (no confirmation prompt)', '  rest -All        Use the all-screens animation when available')
   exit 0
 }
 if ($Shutdown) { shutdown.exe /s /f /t 0; exit $LASTEXITCODE }

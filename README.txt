@@ -14,9 +14,13 @@ macOS and Linux:
   rest -?    # show help
 
 Windows PowerShell:
-  powershell -ExecutionPolicy Bypass -File "$HOME\rest\rest.ps1"
-  powershell -ExecutionPolicy Bypass -File "$HOME\rest\rest.ps1" -Shutdown
-  powershell -ExecutionPolicy Bypass -File "$HOME\rest\rest.ps1" -Restart
+  rest
+  rest -Shutdown
+  rest -Restart
+  rest -?
+
+The Windows installer also creates rest.cmd in the user rest directory. Open a
+new PowerShell window after installation so the updated PATH is loaded.
 
 The -a option is accepted everywhere. On macOS it passes --all to the native
 rest-screen animation when that executable is installed.
@@ -34,7 +38,8 @@ Linux:
 
 Windows:
   rest uses the PowerShell System.Windows.Forms Application suspend API.
-  The command should be run from PowerShell.
+  The installer creates a command wrapper so it can be run as `rest` from a new
+Command Prompt or PowerShell window.
 
 INSTALLATION
 ------------
@@ -57,6 +62,5 @@ Open a new terminal after installation.
 SAFETY
 ------
 
-rest suspends the computer. Save work before using it. Press Ctrl+C during the
-brief cancellation window where supported. The command does not shut down,
-log out, or delete files.
+rest suspends the computer by default. `-z` shuts down and `-d` restarts
+immediately. Save work before using either option; unsaved data may be lost.
