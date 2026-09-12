@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+printf '%s\n' 'Press Ctrl+C within one second to cancel.'
+sleep 1
+exec systemctl suspend

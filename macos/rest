@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+all=0
+[ "${1:-}" = '-a' ] || [ "${1:-}" = '--all' ] && all=1
+if [ -x "$HOME/bin/rest-screen" ]; then
+  if [ "$all" -eq 1 ]; then exec "$HOME/bin/rest-screen" --all; else exec "$HOME/bin/rest-screen"; fi
+fi
+exec /usr/bin/pmset sleepnow
